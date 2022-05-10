@@ -15,11 +15,29 @@ function Boxnes(props) {
 export function Box() {
   const [square, setSquare] = useState(boxData)
 
-  const toggle = id => setSquare(prev => {
-    return prev.map(el => el.id === id ? { ...el, on: !el.on } : el)
-  })
+const toggle = id => setSquare(preValue =>{
+  return preValue.map(square => square.id === id ? {...square, on: !square.on} : square )
+})
 
-  // whiout prev values
+const miniToggle = id => setSquare(
+  square.map(el => el.id === id ? {...el, on: !el.on} : el)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // without prev values
   const test = id => setSquare( 
     square.map(el => el.id === id ? {...el, on: !el.on}: el))
 
@@ -27,7 +45,7 @@ export function Box() {
     key={box.id}
     on={box.on}
     id={box.id}
-    handleClick={test}
+    handleClick={miniToggle}
   > </Boxnes>)
 
 
