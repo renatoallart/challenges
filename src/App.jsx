@@ -6,6 +6,7 @@ import { Count } from './challenges/count/Count'
 import jokesData from './challenges/joke/jokesData'
 import { Message } from './challenges/conditionalRender/Message'
 import { Form } from './challenges/form/Form'
+import { SingUp } from './challenges/singUpForm/SingUp'
 
 
 
@@ -25,7 +26,8 @@ export default function App() {
     <>
     {/* {jokeElements} */}
     {/* <Message/> */}
-    <Form/>
+    {/* <Form/> */}
+    <SingUp/>
     </>
   )
 }

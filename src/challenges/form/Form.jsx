@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 
 export function Form() {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
 
     const prolife = {
         firstName: '',
-        lastName: ''
+        lastName: '',
+        email: '',
+        comments: '',
+        isFriendly: true,
+        employment: '',
+        favColor: ''
 
     }
 
@@ -17,21 +20,87 @@ export function Form() {
     // }
 
     const handleChange = (event) => {
-        serUser({ ...user, [event.target.name]: event.target.value })
+        const { name, value, type, checked } = event.target
+        serUser({ ...user, [name]: type === 'checkbox' ? checked : value }
+        )
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log(user)
+
     }
     return (
 
         // using name to get the params
-        <form >
-            <h1>{user.firstName} {user.lastName}</h1>
+        <form onSubmit={handleSubmit}>
+            <h1>{user.firstName} {user.lastName} {user.email} </h1>
+            <p>{user.comments}</p>
             <input type="text" placeholder='First Name:'
                 name='firstName'
-                onChange={() => handleChange(event)}
+                value={user.firstName}
+                onChange={handleChange}
             />
             <input type="text" placeholder='Last Name:'
                 name='lastName'
-                onChange={() => handleChange(event)} />
+                value={user.lastName}
+                onChange={handleChange} />
+            <input type="text" placeholder='E-mail:'
+                name='email'
+                value={user.email}
+                onChange={handleChange} />
+            <textarea name="comments"
+                value={user.comments}
+                onChange={handleChange} />
+            <input type="checkbox"
+                id='isFriendly'
+                name='isFriendly'
+                checked={user.isFriendly}
+                onChange={handleChange} />
+            <label htmlFor="isFriendly">Are u Friendly?</label>
+            <fieldset>
+                <legend>Current employment status</legend>
+                <input type="radio"
+                    id='unemployed'
+                    name='employment'
+                    value='unemployment'
+                    checked={user.employment === 'unemployment'}
+                    onChange={handleChange} />
+                <label htmlFor="Unemployed">Unemployment</label>
+                <br />
 
+                <input type="radio"
+                    id='part-time'
+                    name='employment'
+                    value='part-time'
+                    checked={user.employment === 'part-time'}
+                    onChange={handleChange} />
+                <label htmlFor="Part-time">Part time</label>
+                <br />
+
+                <input type="radio"
+                    id='full-time'
+                    name='employment'
+                    value='full-time'
+                    checked={user.employment === 'full-time'}
+                    onChange={handleChange} />
+                <label htmlFor="full-time">Full time</label>
+            </fieldset>
+            <label htmlFor="favColor">What is your favorite color?</label>
+            <br />
+            <select id="favColor"
+                value={user.favColor}
+                onChange={handleChange}>
+                <option value="">--Choose--</option>
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="indigo">Indigo</option>
+                <option value="violet">Violet</option>
+            </select>
+            <button>Submit</button>
         </form>
 
         // using normal params
